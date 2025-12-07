@@ -10,14 +10,14 @@ function App() {
   const [activeSection, setActiveSection] = useState('time')
 
   return (
-    <div className="min-h-screen py-12 px-6">
-      <div className="max-w-5xl mx-auto">
+    <div className="min-h-screen py-16 px-6">
+      <div className="max-w-7xl mx-auto space-y-16">
         <HeroSection />
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch mt-12">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           <motion.div
             layout
-            className={`lg:col-span-7 ${activeSection !== 'time' ? 'hidden lg:block' : ''}`}
+            className={`lg:col-span-2 ${activeSection !== 'time' ? 'hidden lg:block' : ''}`}
           >
             <AnimatePresence mode="wait">
               {activeSection === 'time' && (
@@ -27,7 +27,6 @@ function App() {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -20 }}
                   transition={{ duration: 0.3 }}
-                  className="h-full"
                 >
                   <TimeTracker />
                 </motion.div>
@@ -39,7 +38,6 @@ function App() {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -20 }}
                   transition={{ duration: 0.3 }}
-                  className="h-full"
                 >
                   <StatsDashboard />
                 </motion.div>
@@ -51,7 +49,6 @@ function App() {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -20 }}
                   transition={{ duration: 0.3 }}
-                  className="h-full"
                 >
                   <TaskBoard />
                 </motion.div>
@@ -63,7 +60,7 @@ function App() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="lg:col-span-5 hidden lg:block h-full"
+            className="hidden lg:block"
           >
             <StatsDashboard />
           </motion.div>
@@ -73,12 +70,12 @@ function App() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.4 }}
-          className="mt-12 hidden lg:block"
+          className="hidden lg:block"
         >
           <TaskBoard />
         </motion.div>
 
-        <div className="mt-24" />
+        <div className="h-32" />
       </div>
 
       <FloatingDock activeSection={activeSection} setActiveSection={setActiveSection} />
