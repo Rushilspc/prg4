@@ -46,12 +46,17 @@
 body {
   font-family: 'Nunito', sans-serif;
   background: linear-gradient(135deg, #FAFAF9 0%, #FFF5F3 50%, #F0F9FF 100%);
+  background-attachment: fixed;
   color: #4A4A4A;
   min-height: 100vh;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .font-hand {
   font-family: 'Patrick Hand', cursive;
+  line-height: 1.4;
 }
 
 .paper-texture {
@@ -62,23 +67,24 @@ body {
 .watercolor-button {
   background: linear-gradient(135deg, #FFB7B2 0%, #FFDAC1 50%, #B5EAD7 100%);
   border-radius: 50px;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .watercolor-button:hover {
   transform: scale(1.02);
-  box-shadow: 0 10px 30px rgba(255, 183, 178, 0.4);
+  box-shadow: 0 12px 35px rgba(255, 183, 178, 0.45);
 }
 
 .progress-stroke {
   background: linear-gradient(90deg, #B5EAD7 0%, #A0C4FF 50%, #FFB7B2 100%);
   border-radius: 50px;
+  box-shadow: 0 2px 8px rgba(181, 234, 215, 0.3);
 }
 
 .sticky-note {
   background: linear-gradient(145deg, #FFFEF0 0%, #FFF9E6 100%);
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .sticky-note:hover {
@@ -90,7 +96,7 @@ body {
   background: #FFFFFF;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
   border-radius: 24px;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .card-soft:hover {
@@ -98,23 +104,32 @@ body {
 }
 
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 10px;
+  height: 10px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #FAFAF9;
+  background: transparent;
+  margin: 8px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #E5E7EB;
+  background: linear-gradient(180deg, #FFB7B2, #B5EAD7);
   border-radius: 10px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #D1D5DB;
+  background: linear-gradient(180deg, #FF9A94, #9FD7C3);
+  background-clip: padding-box;
 }
 
 input:focus, select:focus, textarea:focus {
   outline: none;
-  background-color: #F9FAFB;
+}
+
+button {
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
 }

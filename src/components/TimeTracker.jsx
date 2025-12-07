@@ -74,53 +74,53 @@ export default function TimeTracker() {
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="bg-white/80 backdrop-blur-sm rounded-3xl shadow-lg p-8 h-full"
+        className="bg-white/90 backdrop-blur-sm rounded-3xl shadow-lg p-10"
       >
-        <h2 className="font-hand text-2xl font-bold text-text mb-6 flex items-center gap-3">
-          <BookOpen className="w-6 h-6 text-sakura" />
+        <h2 className="font-hand text-3xl font-bold text-text mb-10 flex items-center gap-3">
+          <BookOpen className="w-7 h-7 text-sakura" />
           Journal Entry
         </h2>
 
-        <form onSubmit={handleSubmit} className="space-y-6">
+        <form onSubmit={handleSubmit} className="space-y-8">
           <div>
-            <label className="block text-text-light font-medium mb-2 text-sm">What did you work on?</label>
+            <label className="block text-text font-medium mb-3 text-base">What did you work on?</label>
             <input
               type="text"
               value={taskName}
               onChange={(e) => setTaskName(e.target.value)}
               placeholder="Describe your accomplishment..."
-              className="w-full h-12 px-4 bg-white rounded-xl text-text placeholder-gray-400 shadow-sm transition-all focus:shadow-md focus:bg-gray-50"
+              className="w-full h-14 px-5 bg-white rounded-2xl text-text placeholder-gray-400 shadow-sm transition-all focus:shadow-md focus:ring-2 focus:ring-sakura/20 border border-gray-100"
             />
           </div>
 
-          <div className="flex gap-4">
-            <div className="flex-1">
-              <label className="block text-text-light font-medium mb-2 text-sm">Hours</label>
+          <div className="grid grid-cols-2 gap-6">
+            <div>
+              <label className="block text-text font-medium mb-3 text-base">Hours</label>
               <input
                 type="number"
                 min="0"
                 max="24"
                 value={hours}
                 onChange={(e) => setHours(e.target.value)}
-                className="w-full h-12 px-4 bg-white rounded-xl text-text text-center text-lg font-semibold shadow-sm transition-all focus:shadow-md focus:bg-gray-50"
+                className="w-full h-16 px-5 bg-white rounded-2xl text-text text-center text-2xl font-bold shadow-sm transition-all focus:shadow-md focus:ring-2 focus:ring-matcha/20 border border-gray-100"
               />
             </div>
-            <div className="flex-1">
-              <label className="block text-text-light font-medium mb-2 text-sm">Minutes</label>
+            <div>
+              <label className="block text-text font-medium mb-3 text-base">Minutes</label>
               <input
                 type="number"
                 min="0"
                 max="59"
                 value={minutes}
                 onChange={(e) => setMinutes(e.target.value)}
-                className="w-full h-12 px-4 bg-white rounded-xl text-text text-center text-lg font-semibold shadow-sm transition-all focus:shadow-md focus:bg-gray-50"
+                className="w-full h-16 px-5 bg-white rounded-2xl text-text text-center text-2xl font-bold shadow-sm transition-all focus:shadow-md focus:ring-2 focus:ring-matcha/20 border border-gray-100"
               />
             </div>
           </div>
 
           <div>
-            <label className="block text-text-light font-medium mb-3 text-sm">Category</label>
-            <div className="grid grid-cols-2 gap-3">
+            <label className="block text-text font-medium mb-4 text-base">Category</label>
+            <div className="grid grid-cols-2 gap-4">
               {categories.map((cat) => (
                 <motion.button
                   key={cat.value}
@@ -128,8 +128,8 @@ export default function TimeTracker() {
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   onClick={() => setCategory(cat.value)}
-                  className={`h-11 rounded-xl font-medium text-sm transition-all ${
-                    category === cat.value ? cat.activeColor : cat.color
+                  className={`h-12 rounded-2xl font-semibold text-sm transition-all shadow-sm ${
+                    category === cat.value ? cat.activeColor + ' shadow-md' : cat.color
                   }`}
                 >
                   {cat.label}
@@ -140,9 +140,9 @@ export default function TimeTracker() {
 
           <motion.button
             type="submit"
-            whileHover={{ scale: 1.01 }}
-            whileTap={{ scale: 0.99 }}
-            className="w-full h-12 watercolor-button text-white font-semibold flex items-center justify-center gap-2"
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            className="w-full h-14 watercolor-button text-white font-bold text-base flex items-center justify-center gap-3 shadow-md mt-4"
           >
             <PenLine className="w-5 h-5" />
             Log Entry
@@ -150,9 +150,9 @@ export default function TimeTracker() {
         </form>
 
         {logs.length > 0 && (
-          <div className="mt-8 pt-6 border-t border-gray-100">
-            <h3 className="font-hand text-lg text-text-light mb-4">Recent Entries</h3>
-            <div className="space-y-3">
+          <div className="mt-12 pt-8 border-t-2 border-gray-100">
+            <h3 className="font-hand text-xl text-text mb-6">Recent Entries</h3>
+            <div className="space-y-4">
               <AnimatePresence>
                 {logs.slice(-3).reverse().map((log, index) => {
                   const catInfo = getCategoryInfo(log.category)
@@ -163,21 +163,21 @@ export default function TimeTracker() {
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, x: 20 }}
                       transition={{ delay: index * 0.05 }}
-                      className="bg-gray-50 p-4 rounded-xl flex justify-between items-center"
+                      className="bg-gray-50 p-5 rounded-2xl flex justify-between items-center hover:bg-gray-100 transition-colors"
                     >
                       <div>
-                        <div className="font-medium text-text text-sm">{log.taskName}</div>
-                        <div className="text-xs text-text-light mt-1">
+                        <div className="font-semibold text-text text-base mb-1">{log.taskName}</div>
+                        <div className="text-sm text-text-light">
                           {log.hours}h {log.minutes}m · {catInfo.label}
                         </div>
                       </div>
                       <motion.button
-                        whileHover={{ scale: 1.1 }}
+                        whileHover={{ scale: 1.15 }}
                         whileTap={{ scale: 0.9 }}
                         onClick={() => deleteLog(log.id)}
-                        className="p-2 text-text-light hover:text-sakura transition-colors rounded-full hover:bg-sakura/10"
+                        className="p-3 text-text-light hover:text-sakura transition-colors rounded-xl hover:bg-white"
                       >
-                        <Trash2 className="w-4 h-4" />
+                        <Trash2 className="w-5 h-5" />
                       </motion.button>
                     </motion.div>
                   )
