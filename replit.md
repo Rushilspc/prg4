@@ -1,10 +1,10 @@
 # Dopamine Station
 
-A gamified maximalist productivity hub built with React, featuring a neon-arcade aesthetic with neo-brutalist design elements.
+A gamified productivity hub with a calm, artistic "Sunny Canvas" design inspired by Studio Ghibli and Japanese aesthetics.
 
 ## Overview
 
-Dopamine Station is a single-page productivity application that gamifies time tracking and task management. The UI is intentionally loud, colorful, and animated to create an engaging "video game" feel for productivity work.
+Dopamine Station is a single-page productivity application that gamifies time tracking and task management. The UI features a peaceful, watercolor-inspired design that feels like a sunny Japanese park.
 
 ## Tech Stack
 
@@ -23,10 +23,10 @@ src/
 ├── App.jsx               # Main app component
 ├── index.css             # Global styles and Tailwind theme
 ├── components/
-│   ├── HeroSection.jsx   # Animated hero with glitch text
-│   ├── TimeTracker.jsx   # Time Machine - work logger
-│   ├── StatsDashboard.jsx # Power Meter - stats dashboard
-│   ├── TaskBoard.jsx     # Mission Board - task manager
+│   ├── HeroSection.jsx   # Animated hero with hand-drawn text
+│   ├── TimeTracker.jsx   # Journal Entry - work logger
+│   ├── StatsDashboard.jsx # Your Progress - stats dashboard
+│   ├── TaskBoard.jsx     # Task Board - task manager
 │   └── FloatingDock.jsx  # Bottom navigation dock
 └── context/
     └── HoursContext.jsx  # State management for hours/tasks
@@ -34,28 +34,42 @@ src/
 
 ## Features
 
-### Time Machine (Work Logger)
+### Journal Entry (Work Logger)
 - Log completed work with task name, duration, and category
-- Categories: Grind, Deep Work, Admin, Creative
-- Confetti celebration on task completion
+- Categories: Focus Time, Deep Work, Admin, Creative
+- Gentle confetti celebration on task completion
 
-### Power Meter (Hours Calculator)
-- Daily and weekly progress bars
+### Your Progress (Hours Calculator)
+- Daily and weekly progress bars with watercolor gradients
 - Day streak counter
-- Total logs counter
+- Total entries counter
 - Motivational messages based on progress
 
-### Mission Board (Task Planning)
-- RPG-style quest cards with priorities (Legendary, Epic, Rare, Common)
+### Task Board (Task Planning)
+- Sticky-note style cards with priority levels (Important, High, Medium, Low)
 - Add, edit, delete, and complete tasks
 - Tasks persist in LocalStorage
 
 ## Design Philosophy
 
-- **Pop-Culture Maximalism:** Loud, fun, and heavy design
-- **Neo-Brutalism:** Thick borders, harsh shadows
-- **Retro-Arcade:** Neon colors, glitch effects
-- **Bouncy Physics:** Framer Motion for interactive elements
+- **Digital Watercolor:** Clean, artistic, peaceful aesthetic
+- **Sunny Canvas:** Light backgrounds, soft shadows, no harsh borders
+- **Studio Ghibli Inspired:** Calm, productive, nature-inspired
+- **Gentle Animations:** Fade and float effects, smooth transitions
+
+## Color Palette
+
+- **Base:** White / Off-White (#FAFAF9)
+- **Sakura Pink:** #FFB7B2 (highlights)
+- **Matcha Green:** #B5EAD7 (success/progress)
+- **Sky Blue:** #A0C4FF (neutral elements)
+- **Sandstone Orange:** #FFDAC1 (active states)
+- **Text:** Dark Grey (#4A4A4A)
+
+## Typography
+
+- **Body:** Nunito (rounded sans-serif)
+- **Headers:** Patrick Hand (hand-written style)
 
 ## Running Locally
 
@@ -76,8 +90,10 @@ Output goes to the `dist` directory.
 
 ## Recent Changes
 
-- Initial build: December 7, 2025
-- Set up React + Vite project
-- Configured Tailwind CSS v4 with custom neon theme
-- Built all core components with animations
-- Added LocalStorage persistence
+- December 7, 2025: Complete UI redesign - "Sunny Canvas" theme
+  - Replaced neon-arcade aesthetic with calm watercolor design
+  - New color palette (sakura pink, matcha green, sky blue, sandstone)
+  - New typography (Nunito, Patrick Hand)
+  - Removed all glitch effects and harsh borders
+  - Added soft shadows and rounded corners
+  - Updated all components with gentle fade/float animations
