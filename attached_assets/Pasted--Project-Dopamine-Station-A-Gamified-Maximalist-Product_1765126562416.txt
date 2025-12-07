@@ -1,0 +1,54 @@
+# Project: "Dopamine-Station" - A Gamified Maximalist Productivity Hub
+
+## Role & Tech Stack
+You are a Senior Frontend Architect and Creative Developer. 
+Build a single-page React application using:
+- **Framework:** React (Vite)
+- **Styling:** Tailwind CSS (Focus on custom configurations for heavy design)
+- **Animations:** Framer Motion (Mandatory for all interactions)
+- **Icons:** Lucide-React
+- **Persistence:** LocalStorage (for saving tasks/logs)
+- **Fonts:** Import 'Space Grotesk' and 'Rubik Glitch' via Google Fonts.
+
+## Design Philosophy: "Pop-Culture Maximalism"
+**DO NOT make this minimal.** The design must be loud, funny, and heavy.
+- **Aesthetic:** A mix of "Neo-Brutalism" (thick black borders, harsh shadows) and "Retro-Arcade" (neon colors, glitch effects).
+- **Inspiration:** Think Spider-Man: Into the Spider-Verse meets Stranger Things (neon lights) meets Pixar (bouncy physics).
+- **Color Palette:** High contrast. Hot Pink (#FF00FF), Lime Green (#32CD32), Electric Blue (#00FFFF), and Deep Void Black.
+- **Vibe:** The UI should feel "alive." Buttons should bounce when clicked. Cards should tilt on hover. Backgrounds should have moving patterns (grid lines or particles).
+
+## Core Features (Functional Requirements)
+
+### 1. The "Time Machine" (Work Logger)
+- A section to log completed work.
+- Fields: Task Name, Duration (Hours/Minutes), Category (e.g., "Grind", "Deep Work", "Admin").
+- **Gamification:** When a task is added, trigger a confetti explosion or a "Level Up" sound effect/visual.
+
+### 2. The "Power Meter" (Hours Calculator)
+- A prominent, animated dashboard showing:
+  - **Daily Total:** Progress bar filling up as users log hours.
+  - **Weekly Total:** A heavy graphic (like a health bar) showing hours worked vs. goal.
+- Logic: Sum up logs based on the current date and the current ISO week.
+
+### 3. The "Mission Board" (Task Planning)
+- A Kanban-style or List-style view for daily routines.
+- Items should look like "Quest Cards" from an RPG game.
+- Functionality: Add, Edit, Delete, Mark Complete.
+
+## UI/UX Layout & Animation Specs
+1.  **Hero Section:** A massive, animated greeting (e.g., "Welcome to the Chaos, Master"). Text should use glitch effects.
+2.  **Navigation:** A floating dock at the bottom (macOS style but cartoonish) with bouncing icons.
+3.  **Transitions:**
+    - Use `AnimatePresence` for smooth entry/exit of task items.
+    - Stagger animations for lists (items appear one by one).
+4.  **Micro-interactions:**
+    - Hovering over cards should scale them up (scale: 1.05).
+    - Clicking buttons should squash them (scale: 0.95).
+    - Custom Cursor: A large, colorful custom cursor that reacts to clicking.
+
+## Code Structure Constraints
+- Ensure the `HoursContext` handles all math logic for daily/weekly calculations accurately.
+- Use distinct Components: `TimeTracker.jsx`, `StatsDashboard.jsx`, `TaskBoard.jsx`.
+- Ensure the app is fully responsive but prioritizes desktop "dashboard" feel.
+
+**Goal:** Create a productivity tool that feels like a video game interface. It should be fun, chaotic, and functional.
