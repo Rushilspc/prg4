@@ -1,0 +1,39 @@
+# UI Polish Task: Fix Spacing, Alignment, and Clutter
+
+## Objective
+The current layout is too cluttered. The components are squashed together, and the alignment is messy.
+**DO NOT change the color theme (keep the "Sunny/Watercolor" style).**
+**ONLY fix the layout, spacing, and component structure.**
+
+## Layout Rules (Strict Implementation)
+
+### 1. The Container (Fixing the Width)
+- Wrap the entire application in a centered container with a maximum width.
+- Use: `max-w-5xl mx-auto px-6 py-12`.
+- This ensures the website doesn't stretch infinitely on wide screens.
+
+### 2. Vertical Rhythm (Breathing Room)
+- Increase the gap between main sections. Use `gap-12` (3rem) or `space-y-12`.
+- Inside the cards (Journal, Progress, Task Board), double the padding. Change `p-4` to `p-8`.
+
+### 3. Grid Alignment (Fixing the "Messy" Columns)
+- **Desktop View:** Use a 12-column grid.
+  - "Journal Entry" (Time Machine): Span 7 columns (`col-span-7`).
+  - "Your Progress" (Power Meter): Span 5 columns (`col-span-5`).
+- Ensure both cards have the **exact same height**. Use `h-full` on the cards and `items-stretch` on the grid container so they align perfectly at the bottom.
+
+### 4. Input Field Cleanup (The "Journal" Section)
+- The "Hours" and "Minutes" inputs look messy.
+- **Fix:** Put them in a single row using `flex gap-4`.
+- Make the input boxes distinct: Give them a white background `bg-white`, a subtle shadow `shadow-sm`, and a proper height (`h-12`).
+- Align labels *above* the inputs, not floating randomly.
+
+### 5. Typography Fixes
+- The main title "Ready to create something beautiful?" is too large. Reduce text size to `text-4xl` or `text-5xl`.
+- Section Headers (e.g., "Journal Entry"): Make them smaller (`text-2xl`) but bolder.
+
+## Visual Polish Code Instructions
+- Add `backdrop-blur-sm` to the cards to make them feel like frosted glass or high-quality paper.
+- Center the "Navigation/Footer" icons at the very bottom of the screen with plenty of whitespace above them (`mt-20`).
+
+**Action:** Rewrite the layout code (App.jsx / Main Components) to apply these spacing and grid rules immediately.

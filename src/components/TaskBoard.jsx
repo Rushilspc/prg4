@@ -51,27 +51,27 @@ export default function TaskBoard() {
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="card-soft paper-texture p-8"
+      className="bg-white/80 backdrop-blur-sm rounded-3xl shadow-lg p-8"
     >
-      <h2 className="font-hand text-3xl text-text mb-6 flex items-center gap-3">
-        <ClipboardList className="w-7 h-7 text-matcha" />
+      <h2 className="font-hand text-2xl font-bold text-text mb-6 flex items-center gap-3">
+        <ClipboardList className="w-6 h-6 text-matcha" />
         Task Board
       </h2>
 
-      <form onSubmit={handleAddTask} className="space-y-4 mb-6">
+      <form onSubmit={handleAddTask} className="space-y-4 mb-8">
         <div className="flex gap-3">
           <input
             type="text"
             value={newTask}
             onChange={(e) => setNewTask(e.target.value)}
             placeholder="Add a new task..."
-            className="flex-1 p-4 bg-gray-50 rounded-2xl text-text placeholder-gray-400 transition-all focus:bg-gray-100"
+            className="flex-1 h-12 px-4 bg-white rounded-xl text-text placeholder-gray-400 shadow-sm transition-all focus:shadow-md focus:bg-gray-50"
           />
           <motion.button
             type="submit"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="px-5 bg-matcha text-white rounded-2xl shadow-soft hover:shadow-float transition-all"
+            className="w-12 h-12 bg-matcha text-white rounded-xl shadow-sm hover:shadow-md transition-all flex items-center justify-center"
           >
             <Plus className="w-5 h-5" />
           </motion.button>
@@ -97,7 +97,7 @@ export default function TaskBoard() {
         </div>
       </form>
 
-      <div className="space-y-3 max-h-96 overflow-y-auto pr-2">
+      <div className="space-y-3 max-h-80 overflow-y-auto pr-1">
         <AnimatePresence>
           {sortedTasks.map((task, index) => {
             const priorityInfo = getPriorityInfo(task.priority)
@@ -108,8 +108,9 @@ export default function TaskBoard() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.95 }}
                 transition={{ delay: index * 0.03 }}
-                className={`sticky-note p-4 rounded-2xl transition-all ${
-                  task.completed ? 'opacity-60' : priorityInfo.noteColor
+                whileHover={{ y: -3 }}
+                className={`p-4 rounded-xl shadow-sm transition-all hover:shadow-md ${
+                  task.completed ? 'bg-gray-50 opacity-60' : priorityInfo.noteColor
                 }`}
               >
                 <div className="flex items-center gap-3">
@@ -117,7 +118,7 @@ export default function TaskBoard() {
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.9 }}
                     onClick={() => toggleTask(task.id)}
-                    className={`w-6 h-6 rounded-full flex items-center justify-center transition-all ${
+                    className={`w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 transition-all ${
                       task.completed 
                         ? 'bg-matcha text-white' 
                         : 'bg-white border-2 border-gray-200 hover:border-matcha'
@@ -126,26 +127,26 @@ export default function TaskBoard() {
                     {task.completed && <Check className="w-4 h-4" />}
                   </motion.button>
 
-                  <div className="flex-1">
+                  <div className="flex-1 min-w-0">
                     {editingId === task.id ? (
                       <input
                         type="text"
                         value={editText}
                         onChange={(e) => setEditText(e.target.value)}
-                        className="w-full p-2 bg-white rounded-lg text-text"
+                        className="w-full h-9 px-3 bg-white rounded-lg text-text shadow-sm"
                         autoFocus
                       />
                     ) : (
-                      <div className={`font-medium ${task.completed ? 'text-text-light line-through' : 'text-text'}`}>
+                      <div className={`font-medium text-sm truncate ${task.completed ? 'text-text-light line-through' : 'text-text'}`}>
                         {task.text}
                       </div>
                     )}
-                    <div className="text-xs text-text-light mt-1">
-                      {priorityInfo.label} priority
+                    <div className="text-xs text-text-light mt-0.5">
+                      {priorityInfo.label}
                     </div>
                   </div>
 
-                  <div className="flex gap-1">
+                  <div className="flex gap-1 flex-shrink-0">
                     {editingId === task.id ? (
                       <>
                         <motion.button
@@ -193,28 +194,20 @@ export default function TaskBoard() {
         </AnimatePresence>
 
         {tasks.length === 0 && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="text-center py-12 text-text-light"
-          >
-            <ClipboardList className="w-12 h-12 mx-auto mb-4 opacity-30" />
-            <p className="font-hand text-xl">No tasks yet</p>
+          <div className="text-center py-10 text-text-light">
+            <ClipboardList className="w-10 h-10 mx-auto mb-3 opacity-30" />
+            <p className="font-hand text-lg">No tasks yet</p>
             <p className="text-sm">Add your first task above</p>
-          </motion.div>
+          </div>
         )}
       </div>
 
       {tasks.length > 0 && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          className="mt-4 pt-4 border-t border-gray-100 flex justify-between items-center"
-        >
+        <div className="mt-6 pt-4 border-t border-gray-100 text-center">
           <span className="text-text-light text-sm">
             {tasks.filter(t => t.completed).length} of {tasks.length} completed
           </span>
-        </motion.div>
+        </div>
       )}
     </motion.div>
   )

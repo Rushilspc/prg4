@@ -53,7 +53,7 @@ export default function TimeTracker() {
   }
 
   return (
-    <div className="relative">
+    <div className="h-full flex flex-col">
       <AnimatePresence>
         {showSuccess && (
           <motion.div
@@ -74,10 +74,10 @@ export default function TimeTracker() {
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="card-soft paper-texture p-8"
+        className="bg-white/80 backdrop-blur-sm rounded-3xl shadow-lg p-8 h-full"
       >
-        <h2 className="font-hand text-3xl text-text mb-6 flex items-center gap-3">
-          <BookOpen className="w-7 h-7 text-sakura" />
+        <h2 className="font-hand text-2xl font-bold text-text mb-6 flex items-center gap-3">
+          <BookOpen className="w-6 h-6 text-sakura" />
           Journal Entry
         </h2>
 
@@ -89,12 +89,12 @@ export default function TimeTracker() {
               value={taskName}
               onChange={(e) => setTaskName(e.target.value)}
               placeholder="Describe your accomplishment..."
-              className="w-full p-4 bg-gray-50 rounded-2xl text-text placeholder-gray-400 transition-all focus:bg-gray-100"
+              className="w-full h-12 px-4 bg-white rounded-xl text-text placeholder-gray-400 shadow-sm transition-all focus:shadow-md focus:bg-gray-50"
             />
           </div>
 
-          <div className="grid grid-cols-2 gap-4">
-            <div>
+          <div className="flex gap-4">
+            <div className="flex-1">
               <label className="block text-text-light font-medium mb-2 text-sm">Hours</label>
               <input
                 type="number"
@@ -102,10 +102,10 @@ export default function TimeTracker() {
                 max="24"
                 value={hours}
                 onChange={(e) => setHours(e.target.value)}
-                className="w-full p-4 bg-gray-50 rounded-2xl text-text text-center text-xl font-semibold transition-all focus:bg-gray-100"
+                className="w-full h-12 px-4 bg-white rounded-xl text-text text-center text-lg font-semibold shadow-sm transition-all focus:shadow-md focus:bg-gray-50"
               />
             </div>
-            <div>
+            <div className="flex-1">
               <label className="block text-text-light font-medium mb-2 text-sm">Minutes</label>
               <input
                 type="number"
@@ -113,7 +113,7 @@ export default function TimeTracker() {
                 max="59"
                 value={minutes}
                 onChange={(e) => setMinutes(e.target.value)}
-                className="w-full p-4 bg-gray-50 rounded-2xl text-text text-center text-xl font-semibold transition-all focus:bg-gray-100"
+                className="w-full h-12 px-4 bg-white rounded-xl text-text text-center text-lg font-semibold shadow-sm transition-all focus:shadow-md focus:bg-gray-50"
               />
             </div>
           </div>
@@ -128,7 +128,7 @@ export default function TimeTracker() {
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   onClick={() => setCategory(cat.value)}
-                  className={`p-3 rounded-xl font-medium transition-all ${
+                  className={`h-11 rounded-xl font-medium text-sm transition-all ${
                     category === cat.value ? cat.activeColor : cat.color
                   }`}
                 >
@@ -142,51 +142,50 @@ export default function TimeTracker() {
             type="submit"
             whileHover={{ scale: 1.01 }}
             whileTap={{ scale: 0.99 }}
-            className="w-full p-4 watercolor-button text-white font-semibold text-lg flex items-center justify-center gap-2"
+            className="w-full h-12 watercolor-button text-white font-semibold flex items-center justify-center gap-2"
           >
             <PenLine className="w-5 h-5" />
             Log Entry
           </motion.button>
         </form>
-      </motion.div>
 
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.2 }}
-        className="mt-6 space-y-3"
-      >
-        <h3 className="font-hand text-xl text-text-light">Recent Entries</h3>
-        <AnimatePresence>
-          {logs.slice(-5).reverse().map((log, index) => {
-            const catInfo = getCategoryInfo(log.category)
-            return (
-              <motion.div
-                key={log.id}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, x: 20 }}
-                transition={{ delay: index * 0.05 }}
-                className="sticky-note p-4 rounded-2xl flex justify-between items-center"
-              >
-                <div>
-                  <div className="font-semibold text-text">{log.taskName}</div>
-                  <div className="text-sm text-text-light">
-                    {log.hours}h {log.minutes}m · {catInfo.label}
-                  </div>
-                </div>
-                <motion.button
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.9 }}
-                  onClick={() => deleteLog(log.id)}
-                  className="p-2 text-text-light hover:text-sakura transition-colors rounded-full hover:bg-sakura/10"
-                >
-                  <Trash2 className="w-4 h-4" />
-                </motion.button>
-              </motion.div>
-            )
-          })}
-        </AnimatePresence>
+        {logs.length > 0 && (
+          <div className="mt-8 pt-6 border-t border-gray-100">
+            <h3 className="font-hand text-lg text-text-light mb-4">Recent Entries</h3>
+            <div className="space-y-3">
+              <AnimatePresence>
+                {logs.slice(-3).reverse().map((log, index) => {
+                  const catInfo = getCategoryInfo(log.category)
+                  return (
+                    <motion.div
+                      key={log.id}
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, x: 20 }}
+                      transition={{ delay: index * 0.05 }}
+                      className="bg-gray-50 p-4 rounded-xl flex justify-between items-center"
+                    >
+                      <div>
+                        <div className="font-medium text-text text-sm">{log.taskName}</div>
+                        <div className="text-xs text-text-light mt-1">
+                          {log.hours}h {log.minutes}m · {catInfo.label}
+                        </div>
+                      </div>
+                      <motion.button
+                        whileHover={{ scale: 1.1 }}
+                        whileTap={{ scale: 0.9 }}
+                        onClick={() => deleteLog(log.id)}
+                        className="p-2 text-text-light hover:text-sakura transition-colors rounded-full hover:bg-sakura/10"
+                      >
+                        <Trash2 className="w-4 h-4" />
+                      </motion.button>
+                    </motion.div>
+                  )
+                })}
+              </AnimatePresence>
+            </div>
+          </div>
+        )}
       </motion.div>
     </div>
   )
