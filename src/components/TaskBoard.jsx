@@ -1,13 +1,13 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Swords, Plus, Trash2, Check, Edit3, X, Save } from 'lucide-react'
+import { ClipboardList, Plus, Trash2, Check, Edit3, X, Save } from 'lucide-react'
 import { useHours } from '../context/HoursContext'
 
 const priorities = [
-  { value: 'legendary', label: '⚔️ Legendary', color: 'bg-hot-pink', border: 'border-hot-pink' },
-  { value: 'epic', label: '🏆 Epic', color: 'bg-neon-purple', border: 'border-neon-purple' },
-  { value: 'rare', label: '💎 Rare', color: 'bg-electric-blue', border: 'border-electric-blue' },
-  { value: 'common', label: '🌿 Common', color: 'bg-lime-green', border: 'border-lime-green' },
+  { value: 'legendary', label: 'Important', color: 'bg-sakura/20 text-sakura', noteColor: 'bg-gradient-to-br from-[#FFE4E1] to-[#FFF0EE]' },
+  { value: 'epic', label: 'High', color: 'bg-sandstone/20 text-sandstone', noteColor: 'bg-gradient-to-br from-[#FFF3E8] to-[#FFFAF5]' },
+  { value: 'rare', label: 'Medium', color: 'bg-sky/20 text-sky', noteColor: 'bg-gradient-to-br from-[#E8F4FF] to-[#F5FAFF]' },
+  { value: 'common', label: 'Low', color: 'bg-matcha/20 text-matcha', noteColor: 'bg-gradient-to-br from-[#E8F5EC] to-[#F5FFF8]' },
 ]
 
 export default function TaskBoard() {
@@ -51,29 +51,29 @@ export default function TaskBoard() {
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="bg-void-black border-4 border-lime-green p-6 shadow-brutal"
+      className="card-soft paper-texture p-8"
     >
-      <h2 className="font-glitch text-3xl text-lime-green mb-6 flex items-center gap-3">
-        <Swords className="w-8 h-8" />
-        MISSION BOARD
+      <h2 className="font-hand text-3xl text-text mb-6 flex items-center gap-3">
+        <ClipboardList className="w-7 h-7 text-matcha" />
+        Task Board
       </h2>
 
       <form onSubmit={handleAddTask} className="space-y-4 mb-6">
-        <div className="flex gap-2">
+        <div className="flex gap-3">
           <input
             type="text"
             value={newTask}
             onChange={(e) => setNewTask(e.target.value)}
-            placeholder="Enter new quest..."
-            className="flex-1 p-3 bg-void-black border-4 border-arcade-yellow text-white font-space focus:border-hot-pink outline-none"
+            placeholder="Add a new task..."
+            className="flex-1 p-4 bg-gray-50 rounded-2xl text-text placeholder-gray-400 transition-all focus:bg-gray-100"
           />
           <motion.button
             type="submit"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="px-6 bg-arcade-yellow text-black font-bold border-4 border-black shadow-brutal-sm"
+            className="px-5 bg-matcha text-white rounded-2xl shadow-soft hover:shadow-float transition-all"
           >
-            <Plus className="w-6 h-6" />
+            <Plus className="w-5 h-5" />
           </motion.button>
         </div>
 
@@ -82,13 +82,13 @@ export default function TaskBoard() {
             <motion.button
               key={p.value}
               type="button"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.97 }}
               onClick={() => setNewPriority(p.value)}
-              className={`px-3 py-1 border-2 font-bold text-sm transition-all ${
+              className={`px-4 py-2 rounded-xl font-medium text-sm transition-all ${
                 newPriority === p.value
-                  ? `${p.color} text-black border-black`
-                  : `bg-transparent ${p.border} text-white`
+                  ? p.color.replace('/20', '')
+                  : p.color
               }`}
             >
               {p.label}
@@ -104,33 +104,26 @@ export default function TaskBoard() {
             return (
               <motion.div
                 key={task.id}
-                initial={{ opacity: 0, x: -50, rotateX: -15 }}
-                animate={{ opacity: 1, x: 0, rotateX: 0 }}
-                exit={{ opacity: 0, x: 50, scale: 0.8 }}
-                transition={{ delay: index * 0.05 }}
-                whileHover={{ scale: 1.02, rotate: task.completed ? 0 : 1 }}
-                className={`relative p-4 border-4 border-black shadow-brutal-sm transition-all ${
-                  task.completed
-                    ? 'bg-gray-800 opacity-60'
-                    : priorityInfo.color
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.95 }}
+                transition={{ delay: index * 0.03 }}
+                className={`sticky-note p-4 rounded-2xl transition-all ${
+                  task.completed ? 'opacity-60' : priorityInfo.noteColor
                 }`}
               >
-                {task.completed && (
-                  <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                    <div className="w-full h-1 bg-black rotate-[-3deg]" />
-                  </div>
-                )}
-
                 <div className="flex items-center gap-3">
                   <motion.button
-                    whileHover={{ scale: 1.2 }}
-                    whileTap={{ scale: 0.8 }}
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
                     onClick={() => toggleTask(task.id)}
-                    className={`w-8 h-8 border-4 border-black flex items-center justify-center ${
-                      task.completed ? 'bg-lime-green' : 'bg-white'
+                    className={`w-6 h-6 rounded-full flex items-center justify-center transition-all ${
+                      task.completed 
+                        ? 'bg-matcha text-white' 
+                        : 'bg-white border-2 border-gray-200 hover:border-matcha'
                     }`}
                   >
-                    {task.completed && <Check className="w-5 h-5 text-black" />}
+                    {task.completed && <Check className="w-4 h-4" />}
                   </motion.button>
 
                   <div className="flex-1">
@@ -139,27 +132,27 @@ export default function TaskBoard() {
                         type="text"
                         value={editText}
                         onChange={(e) => setEditText(e.target.value)}
-                        className="w-full p-2 bg-white text-black border-2 border-black font-space"
+                        className="w-full p-2 bg-white rounded-lg text-text"
                         autoFocus
                       />
                     ) : (
-                      <div className={`font-bold ${task.completed ? 'text-gray-400 line-through' : 'text-black'}`}>
+                      <div className={`font-medium ${task.completed ? 'text-text-light line-through' : 'text-text'}`}>
                         {task.text}
                       </div>
                     )}
-                    <div className={`text-xs ${task.completed ? 'text-gray-500' : 'text-black opacity-70'}`}>
-                      {priorityInfo.label}
+                    <div className="text-xs text-text-light mt-1">
+                      {priorityInfo.label} priority
                     </div>
                   </div>
 
-                  <div className="flex gap-2">
+                  <div className="flex gap-1">
                     {editingId === task.id ? (
                       <>
                         <motion.button
                           whileHover={{ scale: 1.1 }}
                           whileTap={{ scale: 0.9 }}
                           onClick={() => saveEdit(task.id)}
-                          className="p-2 bg-lime-green text-black border-2 border-black"
+                          className="p-2 text-matcha hover:bg-matcha/10 rounded-full transition-colors"
                         >
                           <Save className="w-4 h-4" />
                         </motion.button>
@@ -167,7 +160,7 @@ export default function TaskBoard() {
                           whileHover={{ scale: 1.1 }}
                           whileTap={{ scale: 0.9 }}
                           onClick={() => setEditingId(null)}
-                          className="p-2 bg-hot-pink text-black border-2 border-black"
+                          className="p-2 text-text-light hover:bg-gray-100 rounded-full transition-colors"
                         >
                           <X className="w-4 h-4" />
                         </motion.button>
@@ -178,7 +171,7 @@ export default function TaskBoard() {
                           whileHover={{ scale: 1.1 }}
                           whileTap={{ scale: 0.9 }}
                           onClick={() => startEdit(task)}
-                          className="p-2 bg-electric-blue text-black border-2 border-black"
+                          className="p-2 text-text-light hover:text-sky hover:bg-sky/10 rounded-full transition-colors"
                         >
                           <Edit3 className="w-4 h-4" />
                         </motion.button>
@@ -186,7 +179,7 @@ export default function TaskBoard() {
                           whileHover={{ scale: 1.1 }}
                           whileTap={{ scale: 0.9 }}
                           onClick={() => deleteTask(task.id)}
-                          className="p-2 bg-void-black text-hot-pink border-2 border-black hover:bg-hot-pink hover:text-black transition-colors"
+                          className="p-2 text-text-light hover:text-sakura hover:bg-sakura/10 rounded-full transition-colors"
                         >
                           <Trash2 className="w-4 h-4" />
                         </motion.button>
@@ -203,11 +196,11 @@ export default function TaskBoard() {
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="text-center py-8 text-gray-500"
+            className="text-center py-12 text-text-light"
           >
-            <Swords className="w-16 h-16 mx-auto mb-4 opacity-30" />
-            <p className="font-glitch text-xl">No quests yet!</p>
-            <p className="text-sm">Add your first mission above</p>
+            <ClipboardList className="w-12 h-12 mx-auto mb-4 opacity-30" />
+            <p className="font-hand text-xl">No tasks yet</p>
+            <p className="text-sm">Add your first task above</p>
           </motion.div>
         )}
       </div>
@@ -216,22 +209,11 @@ export default function TaskBoard() {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          className="mt-4 pt-4 border-t-4 border-gray-800 flex justify-between items-center"
+          className="mt-4 pt-4 border-t border-gray-100 flex justify-between items-center"
         >
-          <span className="text-gray-400">
-            {tasks.filter(t => t.completed).length} / {tasks.length} completed
+          <span className="text-text-light text-sm">
+            {tasks.filter(t => t.completed).length} of {tasks.length} completed
           </span>
-          <div className="flex gap-2">
-            {priorities.map((p) => {
-              const count = tasks.filter(t => t.priority === p.value && !t.completed).length
-              if (count === 0) return null
-              return (
-                <span key={p.value} className={`${p.color} text-black px-2 py-1 text-xs font-bold border-2 border-black`}>
-                  {count} {p.label.split(' ')[1]}
-                </span>
-              )
-            })}
-          </div>
         </motion.div>
       )}
     </motion.div>

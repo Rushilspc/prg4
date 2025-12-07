@@ -1,90 +1,69 @@
 import { motion } from 'framer-motion'
-import { Zap, Rocket } from 'lucide-react'
+import { Sun, Sparkles } from 'lucide-react'
 
 export default function HeroSection() {
   const greetings = [
-    "Welcome to the Chaos, Master",
-    "Ready to Grind, Legend?",
-    "Time to Level Up!",
-    "Productivity Mode: BEAST",
+    "Good vibes only, friend",
+    "Ready to create something beautiful?",
+    "Let's make today count",
+    "Your peaceful productivity space",
   ]
   
   const randomGreeting = greetings[Math.floor(Math.random() * greetings.length)]
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: -50 }}
+      initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8, type: "spring" }}
-      className="text-center py-8 mb-8 relative overflow-hidden"
+      transition={{ duration: 0.8, ease: "easeOut" }}
+      className="text-center py-12 mb-8"
     >
       <motion.div
-        animate={{ 
-          backgroundPosition: ['0% 0%', '100% 100%'],
-        }}
-        transition={{ 
-          duration: 20, 
-          repeat: Infinity, 
-          repeatType: "reverse" 
-        }}
-        className="absolute inset-0 opacity-20"
-        style={{
-          background: 'linear-gradient(45deg, #FF00FF, #00FFFF, #32CD32, #FFE500)',
-          backgroundSize: '400% 400%',
-        }}
-      />
-
-      <motion.div
-        initial={{ scale: 0 }}
-        animate={{ scale: 1 }}
-        transition={{ delay: 0.3, type: "spring", stiffness: 200 }}
-        className="inline-flex items-center gap-3 mb-4"
+        initial={{ scale: 0.9, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{ delay: 0.2, duration: 0.5 }}
+        className="inline-flex items-center gap-3 mb-6"
       >
         <motion.div
-          animate={{ rotate: 360 }}
-          transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+          animate={{ rotate: [0, 10, -10, 0] }}
+          transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
         >
-          <Zap className="w-10 h-10 text-arcade-yellow" />
+          <Sun className="w-8 h-8 text-sandstone" />
         </motion.div>
-        <span className="text-hot-pink font-bold text-sm uppercase tracking-widest">
+        <span className="text-sakura font-semibold text-sm uppercase tracking-widest">
           Dopamine Station
         </span>
         <motion.div
-          animate={{ rotate: -360 }}
-          transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+          animate={{ scale: [1, 1.2, 1] }}
+          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
         >
-          <Rocket className="w-10 h-10 text-electric-blue" />
+          <Sparkles className="w-6 h-6 text-matcha" />
         </motion.div>
       </motion.div>
 
       <motion.h1
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.5 }}
-        className="relative inline-block"
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.4, duration: 0.6 }}
+        className="font-hand text-4xl md:text-5xl lg:text-6xl text-text mb-4"
       >
-        <span 
-          className="glitch-text font-glitch text-4xl md:text-6xl lg:text-7xl"
-          data-text={randomGreeting}
-        >
-          {randomGreeting}
-        </span>
+        {randomGreeting}
       </motion.h1>
 
       <motion.p
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.8 }}
-        className="mt-6 text-gray-400 text-lg max-w-2xl mx-auto"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.6 }}
+        className="text-text-light text-lg max-w-md mx-auto font-light"
       >
-        Track your time. Complete quests. Become legendary.
+        Track your time. Complete quests. Find your flow.
       </motion.p>
 
       <motion.div
         initial={{ scaleX: 0 }}
         animate={{ scaleX: 1 }}
-        transition={{ delay: 1, duration: 0.5 }}
-        className="mt-6 h-1 bg-gradient-to-r from-transparent via-hot-pink to-transparent max-w-lg mx-auto"
+        transition={{ delay: 0.8, duration: 0.6 }}
+        className="mt-8 h-1 bg-gradient-to-r from-transparent via-sakura/50 to-transparent max-w-xs mx-auto rounded-full"
       />
     </motion.div>
   )

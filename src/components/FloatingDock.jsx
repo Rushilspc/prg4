@@ -1,10 +1,10 @@
 import { motion } from 'framer-motion'
-import { Clock, BarChart3, ListTodo, Sparkles } from 'lucide-react'
+import { BookOpen, BarChart3, ClipboardList } from 'lucide-react'
 
 const dockItems = [
-  { icon: Clock, label: 'Time', section: 'time' },
-  { icon: BarChart3, label: 'Stats', section: 'stats' },
-  { icon: ListTodo, label: 'Tasks', section: 'tasks' },
+  { icon: BookOpen, label: 'Journal', section: 'time' },
+  { icon: BarChart3, label: 'Progress', section: 'stats' },
+  { icon: ClipboardList, label: 'Tasks', section: 'tasks' },
 ]
 
 export default function FloatingDock({ activeSection, setActiveSection }) {
@@ -12,40 +12,31 @@ export default function FloatingDock({ activeSection, setActiveSection }) {
     <motion.div
       initial={{ y: 100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
-      transition={{ delay: 0.5, type: "spring", stiffness: 200 }}
+      transition={{ delay: 0.5, type: "spring", stiffness: 200, damping: 20 }}
       className="fixed bottom-6 left-1/2 transform -translate-x-1/2 z-50"
     >
-      <div className="flex items-center gap-2 bg-void-black/90 backdrop-blur-sm border-4 border-hot-pink px-4 py-3 shadow-[0_0_30px_#FF00FF]">
+      <div className="flex items-center gap-2 bg-white/90 backdrop-blur-md px-4 py-3 rounded-full shadow-float">
         {dockItems.map((item, index) => (
           <motion.button
             key={item.section}
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
             transition={{ delay: 0.6 + index * 0.1, type: "spring" }}
-            whileHover={{ scale: 1.2, y: -10 }}
-            whileTap={{ scale: 0.9 }}
+            whileHover={{ scale: 1.1, y: -4 }}
+            whileTap={{ scale: 0.95 }}
             onClick={() => setActiveSection(item.section)}
-            className={`relative p-3 rounded-none border-4 border-black transition-all ${
+            className={`relative p-3 rounded-full transition-all ${
               activeSection === item.section
-                ? 'bg-hot-pink text-black shadow-brutal-sm'
-                : 'bg-void-black text-white hover:bg-gray-900'
+                ? 'bg-gradient-to-r from-sakura to-sandstone text-white shadow-soft'
+                : 'text-text-light hover:bg-gray-100'
             }`}
           >
-            <item.icon className="w-6 h-6" />
-            
-            {activeSection === item.section && (
-              <motion.div
-                layoutId="dock-indicator"
-                className="absolute -top-2 left-1/2 transform -translate-x-1/2"
-              >
-                <Sparkles className="w-4 h-4 text-arcade-yellow" />
-              </motion.div>
-            )}
+            <item.icon className="w-5 h-5" />
             
             <motion.span
-              initial={{ opacity: 0, y: 10 }}
+              initial={{ opacity: 0, y: 5 }}
               whileHover={{ opacity: 1, y: 0 }}
-              className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 text-xs font-bold text-electric-blue whitespace-nowrap"
+              className="absolute -bottom-7 left-1/2 transform -translate-x-1/2 text-xs font-medium text-text-light whitespace-nowrap"
             >
               {item.label}
             </motion.span>

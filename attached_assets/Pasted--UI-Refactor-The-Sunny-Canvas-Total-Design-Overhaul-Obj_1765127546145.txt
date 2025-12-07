@@ -1,0 +1,54 @@
+# UI Refactor: "The Sunny Canvas" (Total Design Overhaul)
+
+## Objective
+Keep the existing functionality (Time Machine, Power Meter, Mission Board, LocalStorage logic) exactly as is.
+**COMPLETELY DELETE** the current CSS styling. Remove all neon colors, black backgrounds, thick borders, and glitch effects.
+
+## New Design Direction: "Digital Watercolor & Sunny Park"
+The website should look like a clean, high-quality art piece or a sunny Japanese park.
+- **Primary Background:** clean White (#FFFFFF) or extremely light Cream (#FAFAF9).
+- **Texture:** The UI should feel like high-quality watercolor paper.
+- **Borders:** NO VISIBLE BORDERS. Use soft spacing and subtle, diffuse shadows to separate sections.
+- **Vibe:** Calm, productive, artistic, "Studio Ghibli" inspired.
+
+## Color Palette (Natural & Bright)
+- **Base:** White / Off-White.
+- **Accents:**
+  - Sakura Pink (#FFB7B2) for highlights.
+  - Matcha Green (#B5EAD7) for progress bars/success.
+  - Sky Blue (#A0C4FF) for neutral elements.
+  - Sandstone Orange (#FFDAC1) for active states.
+- **Text:** Dark Grey (#4A4A4A) or Deep Indigo. NEVER pure black.
+
+## Typography
+- Replace "Rubik Glitch" and "Space Grotesk".
+- Use **'Nunito'** (Rounded Sans-serif) for body text (friendly and soft).
+- Use **'Pacifico'** or **'Patrick Hand'** for Headers (hand-written art style).
+
+## Component Redesign Specs
+
+### 1. General Layout
+- Remove the grid lines.
+- The app container should look like a sheet of paper centered on a wooden or blurred background.
+- **Shadows:** Use `shadow-lg` and `shadow-xl` with low opacity to make elements float softly.
+- **Rounded Corners:** Use `rounded-3xl` for a soft, organic feel.
+
+### 2. The Time Machine (Work Input)
+- Instead of a "Terminal," make it look like a **Journal Entry**.
+- Input fields should be borderless with a light gray background (`bg-gray-50`) that darkens slightly on focus.
+- The "Log Mission" button should look like a watercolor paint stroke (gradient background, rounded ends).
+
+### 3. The Power Meter (Dashboard)
+- **Progress Bars:** Should look like a paintbrush stroke. No hard edges.
+- **Stats:** Display simple numbers with soft typography.
+
+### 4. Mission Board (Tasks)
+- Tasks should look like "Sticky Notes" or "Cards" pinned to the board.
+- **Hover Effect:** When hovering a task, it should lift up slightly (transform: translateY(-5px)) with a soft shadow increase. No tilting or shaking.
+
+## Animations
+- Remove all "glitch" and "shake" animations.
+- Replace with **"Fade"** and **"Float"**. Elements should gently fade in.
+- The progress bar should fill slowly and smoothly (ease-out).
+
+**Instruction:** Refactor the entire CSS and Tailwind classes to match this calm, bright, artistic theme. Maintain all current React logic and state.

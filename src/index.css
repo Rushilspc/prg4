@@ -1,50 +1,39 @@
 @import "tailwindcss";
 
 @theme {
-  --color-hot-pink: #FF00FF;
-  --color-lime-green: #32CD32;
-  --color-electric-blue: #00FFFF;
-  --color-void-black: #0a0a0a;
-  --color-neon-purple: #9D00FF;
-  --color-arcade-yellow: #FFE500;
+  --color-cream: #FAFAF9;
+  --color-sakura: #FFB7B2;
+  --color-matcha: #B5EAD7;
+  --color-sky: #A0C4FF;
+  --color-sandstone: #FFDAC1;
+  --color-text: #4A4A4A;
+  --color-text-light: #6B7280;
+  --color-paper: #FFFFFF;
   
-  --font-family-space: "Space Grotesk", sans-serif;
-  --font-family-glitch: "Rubik Glitch", cursive;
+  --font-family-nunito: "Nunito", sans-serif;
+  --font-family-hand: "Patrick Hand", cursive;
   
-  --shadow-brutal: 8px 8px 0px 0px #000000;
-  --shadow-brutal-sm: 4px 4px 0px 0px #000000;
-  --shadow-brutal-lg: 12px 12px 0px 0px #000000;
-  --shadow-neon-pink: 0 0 20px #FF00FF, 0 0 40px #FF00FF;
-  --shadow-neon-blue: 0 0 20px #00FFFF, 0 0 40px #00FFFF;
-  --shadow-neon-green: 0 0 20px #32CD32, 0 0 40px #32CD32;
+  --shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.05);
+  --shadow-float: 0 10px 40px rgba(0, 0, 0, 0.08);
+  --shadow-hover: 0 15px 50px rgba(0, 0, 0, 0.12);
   
-  --animate-glitch: glitch 1s infinite;
-  --animate-pulse-neon: pulse-neon 2s infinite;
-  --animate-float: float 3s ease-in-out infinite;
-  --animate-shake: shake 0.5s ease-in-out;
+  --animate-fade-in: fade-in 0.6s ease-out;
+  --animate-float: float 4s ease-in-out infinite;
+  --animate-slide-up: slide-up 0.5s ease-out;
   
-  @keyframes glitch {
-    0%, 100% { transform: translate(0); }
-    20% { transform: translate(-2px, 2px); }
-    40% { transform: translate(-2px, -2px); }
-    60% { transform: translate(2px, 2px); }
-    80% { transform: translate(2px, -2px); }
-  }
-  
-  @keyframes pulse-neon {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.5; }
+  @keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
   }
   
   @keyframes float {
     0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-10px); }
+    50% { transform: translateY(-8px); }
   }
   
-  @keyframes shake {
-    0%, 100% { transform: translateX(0); }
-    25% { transform: translateX(-5px); }
-    75% { transform: translateX(5px); }
+  @keyframes slide-up {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
   }
 }
 
@@ -55,104 +44,77 @@
 }
 
 body {
-  font-family: 'Space Grotesk', sans-serif;
-  background-color: #0a0a0a;
-  color: white;
-  overflow-x: hidden;
+  font-family: 'Nunito', sans-serif;
+  background: linear-gradient(135deg, #FAFAF9 0%, #FFF5F3 50%, #F0F9FF 100%);
+  color: #4A4A4A;
+  min-height: 100vh;
 }
 
-.glitch-text {
-  position: relative;
-  font-family: 'Rubik Glitch', cursive;
+.font-hand {
+  font-family: 'Patrick Hand', cursive;
 }
 
-.glitch-text::before,
-.glitch-text::after {
-  content: attr(data-text);
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+.paper-texture {
+  background-color: #FFFFFF;
+  background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
 }
 
-.glitch-text::before {
-  animation: glitch-1 0.5s infinite;
-  color: #FF00FF;
-  z-index: -1;
+.watercolor-button {
+  background: linear-gradient(135deg, #FFB7B2 0%, #FFDAC1 50%, #B5EAD7 100%);
+  border-radius: 50px;
+  transition: all 0.3s ease;
 }
 
-.glitch-text::after {
-  animation: glitch-2 0.5s infinite;
-  color: #00FFFF;
-  z-index: -2;
+.watercolor-button:hover {
+  transform: scale(1.02);
+  box-shadow: 0 10px 30px rgba(255, 183, 178, 0.4);
 }
 
-@keyframes glitch-1 {
-  0%, 100% { clip-path: inset(0 0 0 0); transform: translate(0); }
-  20% { clip-path: inset(20% 0 60% 0); transform: translate(-2px, 2px); }
-  40% { clip-path: inset(40% 0 40% 0); transform: translate(2px, -2px); }
-  60% { clip-path: inset(60% 0 20% 0); transform: translate(-2px, 2px); }
-  80% { clip-path: inset(80% 0 0 0); transform: translate(2px, -2px); }
+.progress-stroke {
+  background: linear-gradient(90deg, #B5EAD7 0%, #A0C4FF 50%, #FFB7B2 100%);
+  border-radius: 50px;
 }
 
-@keyframes glitch-2 {
-  0%, 100% { clip-path: inset(0 0 0 0); transform: translate(0); }
-  20% { clip-path: inset(80% 0 0 0); transform: translate(2px, -2px); }
-  40% { clip-path: inset(60% 0 20% 0); transform: translate(-2px, 2px); }
-  60% { clip-path: inset(40% 0 40% 0); transform: translate(2px, -2px); }
-  80% { clip-path: inset(20% 0 60% 0); transform: translate(-2px, 2px); }
+.sticky-note {
+  background: linear-gradient(145deg, #FFFEF0 0%, #FFF9E6 100%);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
 }
 
-.grid-background {
-  background-image: 
-    linear-gradient(rgba(255, 0, 255, 0.1) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 0, 255, 0.1) 1px, transparent 1px);
-  background-size: 50px 50px;
-  animation: grid-move 20s linear infinite;
+.sticky-note:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
 }
 
-@keyframes grid-move {
-  0% { background-position: 0 0; }
-  100% { background-position: 50px 50px; }
+.card-soft {
+  background: #FFFFFF;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  border-radius: 24px;
+  transition: all 0.3s ease;
 }
 
-.neon-border {
-  border: 3px solid #FF00FF;
-  box-shadow: 0 0 10px #FF00FF, inset 0 0 10px rgba(255, 0, 255, 0.2);
-}
-
-.brutal-card {
-  border: 4px solid #000;
-  box-shadow: 8px 8px 0px 0px #000000;
-  transition: all 0.2s ease;
-}
-
-.brutal-card:hover {
-  transform: translate(-4px, -4px);
-  box-shadow: 12px 12px 0px 0px #000000;
-}
-
-.health-bar {
-  background: linear-gradient(90deg, #32CD32, #FFE500, #FF00FF);
-  border-radius: 0;
-  height: 100%;
-  transition: width 0.5s ease;
+.card-soft:hover {
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
 }
 
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #0a0a0a;
+  background: #FAFAF9;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #FF00FF;
-  border: 2px solid #000;
+  background: #E5E7EB;
+  border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #00FFFF;
+  background: #D1D5DB;
+}
+
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  background-color: #F9FAFB;
 }
